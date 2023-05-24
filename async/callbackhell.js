@@ -9,17 +9,17 @@ function hola(nombre, miCallback) {
 
 function hablar(elCallback){
     setTimeout(()=>{
-        console.log("bla bla bla")
-    }, 2000);
-    elCallback();
+        console.log("bla bla bla");
+        elCallback();
+    }, 2000); 
 }
 
 function adios(nombre, otroCallback) {
     setTimeout(function() {console.log('Adios', nombre); otroCallback();}, 5000);
 }
 
-
-hola('Alejandro', function (nombre) {
+//Forma callback hell
+/* hola('Alejandro', function (nombre) {
     hablar(function(){
         hablar(function(){
             hablar(function(){
@@ -29,4 +29,23 @@ hola('Alejandro', function (nombre) {
             })
         })
     })   
+}); */
+//Forma corregida
+
+function conversación(nombre, veces, callback){
+    if(veces > 0){
+        hablar(function(){
+            conversación(nombre, --veces, callback)
+        })
+    }
+    else{
+        callback()
+    }
+}
+hola('Alejandro', function (nombre) {
+    conversación(nombre, 3, function(){
+        adios(nombre, function() {
+            console.log('Terminando proceso...');
+        });
+    })
 });
