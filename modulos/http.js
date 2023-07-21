@@ -1,5 +1,6 @@
 const http = require("http");
 
+console.log("empezando server");
 http.createServer(router).listen(3000);
 
 function router(req, res) {
@@ -25,7 +26,10 @@ function router(req, res) {
       res.write("Error 404: No se lo que quieres");
       res.end();
   }
-
+  setTimeout(() => {
+    console.log("antes de esperando url");
+  }, 3000);
+  console.log("esperando url");
   // res.writeHead(201, { 'Content-Type': 'text/plain' })
 
   // // Escribir respuesta al usuario
