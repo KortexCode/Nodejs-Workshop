@@ -74,4 +74,18 @@ async function writeOrRead(data) {
   }
 }
 
-writeOrRead("Soy nuevo chikorita");
+/* writeOrRead("Soy nuevo chikorita"); */
+
+//Usando una /Promise en el require
+const { readFile } = require("fs/promises");
+
+async function readFsPromise() {
+  try {
+    const lectura = await readFile("./data/newArchivo.txt", "utf-8");
+    console.log(lectura);
+  } catch (err) {
+    console.error("Ocurrió un error", err);
+  }
+}
+
+readFsPromise();
